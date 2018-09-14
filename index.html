@@ -197,14 +197,23 @@ margin-bottom: 100px;
 <h1 align="center">Map and Data Analysis</h1>
 <h3 align="Left">Koki Izuka - z5158538</h3>
 <p>The income of people heavily depends on their main jobs. In NSW, there is an imaginary line called "Latte Line". The Latte Line expresses the difference in wealthiness of people in Sydney. The line lies down from Sydney Airport to Parramatta. The north, which is the upper part of Latte line is the country's most advanced area. On the other hand, the down part of latte line is still quiet.  </p>
-<p></p>
+
+<h4>The Dataset</h4>
+<p>The data set that i have selected is “Occupation by Hours by Sex”. This data set contains data of NSW; different occupations and the total number of people worked for different total number of worked hours in a week. I have selected 4 different categories of people from the dataset, which are:</p>
+<ul>
+  <li>Male Full-time Professionals</li>
+  <li>Male Full-time Labourers</li>
+  <li>Female Full-time Professionals</li>
+  <li>Female Full-time Labourers</li>
+</ul>
+
+<p>In general, the hour of full-time jobs are considered as 40 hours. Therefore, I have selected the these categories of people who worked for 40 hours. The types of jobs determine the wealthiness of people to some extent. And these two categories of job, the professionals and labourers would have the big difference in incomes. By analyzing this dataset, it might be possible to find some kind of discriminations with in the areas, which might relate to the “Latte Line”.</p>
+
 
 <div class="row">
     <div class="column">
 <div id='map'></div>
 <div id='map3'></div>
-<div id='map2'></div>
-<div id='map4'></div>
 </div>
 </div>
 <p></p>
@@ -287,12 +296,12 @@ maptwo.on('load', function() {
                 'fill-extrusion-color' : {
                     'property': 'F_Pro_Per',
                     "stops":[
-                        [0, '#CCFFCC'],
-                    	[0.2,'#99FF99'],
-                        [0.4,'#66FF66'],
-                        [0.6,'#00FF00'],
-                        [0.8,'#00CC00'],
-                        [1,'#006600']
+                        [0, '#FFC0CB'],
+                    	[0.2,'#FFA07A'],
+                        [0.4,'#F08080'],
+                        [0.6,'#DC143C'],
+                        [0.8,'#B22222'],
+                        [1,'#8B0000']
                     ]
                     
                 },
@@ -378,12 +387,12 @@ mapfour.on('load', function() {
                 'fill-extrusion-color' : {
                     'property': 'F_Lab_Per',
                     "stops":[
-                        [0, '#CCFFCC'],
-                    	[0.2,'#99FF99'],
-                        [0.4,'#66FF66'],
-                        [0.6,'#00FF00'],
-                        [0.8,'#00CC00'],
-                        [1,'#006600']
+                        [0, '#FFC0CB'],
+                    	[0.2,'#FFA07A'],
+                        [0.4,'#F08080'],
+                        [0.6,'#DC143C'],
+                        [0.8,'#B22222'],
+                        [1,'#8B0000']
                     ]
                     
                 },
