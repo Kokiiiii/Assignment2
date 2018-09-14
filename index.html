@@ -7,13 +7,114 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
     <script src='./data.js'></script>
     <script src='./data2.js'></script>
+    <script src='./data3.js'></script>
+    <script src='./data4.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; float:center; }
         #map { width: 50%; height: 400px; float: left}
         #map2 { width: 50%; height: 400px; margin-left: 50%}
+        #menu
+{
+ background
+: #fff
+;
+ position
+: absolute
+;
+ z-index
+: 1
+;
+ top
+: 10px
+;
+ right
+: 10px
+;
+ border-radius
+: 3px
+;
+ width
+: 120px
+;
+ border
+: 1px solid rgba
+(0,0,0,0.4);
+ font-family
+: 'Open Sans', sans-serif
+;
+
+}
+ #menu a
+{
+ font-size
+: 13px
+;
+ color
+: #404040
+;
+ display
+: block
+;
+ margin
+: 0
+;
+ padding
+: 0
+;
+ padding
+: 10px
+;
+ text-decoration
+: none
+;
+ border-bottom
+: 1px solid rgba
+(0,0,0,0.25);
+ text-align
+: center
+;
+
+}
+ #menu a:last-child
+{
+ border
+: none
+;
+
+}
+ #menu a:hover
+{
+ background-color
+: #f8f8f8
+;
+ color
+: #404040
+;
+
+}
+ #menu a.active
+{
+ background-color
+: #3887be
+;
+ color
+: #ffffff
+;
+
+}
+ #menu a.active:hover
+{
+ background
+: #3074a4
+;
+
+}
+
     </style>
 </head>
+
+
 <body>
 
 <div id='map'></div>
@@ -62,8 +163,41 @@ map.on('load', function() {
                         [195,19500]
                     ]
                 },
-                 'fill-extrusion-opacity': 1
+                 'fill-extrusion-opacity': 0.7
             }
+    map.addLayer({
+        "id": "data3",
+        "type": "fill-extrusion",
+        "source": {
+            'type': 'geojson',
+            'data': data3
+        },
+           'paint': {
+                'fill-extrusion-color' : {
+                    'property': 'M_Lab_Per',
+                    "stops":[
+                        [0, '#CCFFCC'],
+                    	[0.2,'#99FF99'],
+                        [0.4,'#66FF66'],
+                        [0.6,'#00FF00'],
+                        [0.8,'#00CC00'],
+                        [1,'#006600']
+                    ]
+                    
+                },
+                'fill-extrusion-height' : {
+                    'property': 'M_Lab',
+                    "stops":[
+                        [0, 0],
+                    	[39, 3900],
+                        [78, 7800],
+                        [117, 11700],
+                        [156, 15600],
+                        [195,19500]
+                    ]
+                },
+                 'fill-extrusion-opacity': 0.7
+            }        
     });
 });
 
@@ -109,8 +243,72 @@ maptwo.on('load', function() {
                 },
                  'fill-extrusion-opacity': 1
             }
+
+    maptwo.addLayer({
+        "id": "data4",
+        "type": "fill-extrusion",
+        "source": {
+        'type': 'geojson',
+        'data': data4
+        },
+           'paint': {
+                'fill-extrusion-color' : {
+                    'property': 'F_Lab_Per',
+                    "stops":[
+                        [0, '#CCFFCC'],
+                    	[0.2,'#99FF99'],
+                        [0.4,'#66FF66'],
+                        [0.6,'#00FF00'],
+                        [0.8,'#00CC00'],
+                        [1,'#006600']
+                    ]
+                    
+                },
+                'fill-extrusion-height' : {
+                    'property': 'F_Lab',
+                    "stops":[
+                        [0, 0],
+                    	  [7, 700],
+                        [16, 1600],
+                        [45, 4500],
+                        [132, 13200]
+                    ]
+                },
+                 'fill-extrusion-opacity': 1
+            }
+            
     });
 });
+
+//LIST OF LayerIDs and Display Text
+var toggleableLayerIds = ['data', 'data2'];
+var toggleableLayerText = ['Dataset 1', 'Dataset 2'];
+//TOGGLE
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+ var id = toggleableLayerIds[i];
+ var idText= toggleableLayerText[i];
+ var link = document.createElement('a');
+ link.href = '#';
+ link.className = 'active';
+ link.textContent = idText;
+ link.textId = id;
+ link.onclick = function (e) {
+ var clickedLayer = this.textId;
+ e.preventDefault();
+ e.stopPropagation();
+ var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+ if (visibility === 'visible') {
+ map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+ this.className = '';
+ } else {
+ this.className = 'active';
+ map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+ }
+ };
+ var layers = document.getElementById('menu');
+ layers.appendChild(link); }
+
+
 </script>
 
 </body>
