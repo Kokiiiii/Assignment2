@@ -207,6 +207,8 @@ margin-bottom: 100px;
 <div id='map4'></div>
 </div>
 </div>
+<p></p>
+
 
 <div class="row">
     <div class="column">
@@ -320,7 +322,7 @@ var mapthree = new mapboxgl.Map({
 });
 mapthree.on('load', function() {
 
-    maptwo.addLayer({
+    mapthree.addLayer({
         "id": "data3",
         "type": "fill-extrusion",
         "source": {
@@ -365,7 +367,7 @@ var mapfour = new mapboxgl.Map({
 });
 mapfour.on('load', function() {
 
-    maptwo.addLayer({
+    mapfour.addLayer({
         "id": "data4",
         "type": "fill-extrusion",
         "source": {
