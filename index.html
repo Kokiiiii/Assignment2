@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Occupation by Hours by Sex</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src='./data.js'></script>
+    <script src='./data2.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; float:center; }
+        #map { width: 50%; height: 400px; float: left}
+        #map2 { width: 50%; height: 400px; margin-left: 50%}
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<div id='map2'></div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoia29raWlpaWkiLCJhIjoiY2pseHZjeG0yMGY4MTNxbjh1ZDVzdG96NCJ9.eDyz5Sx3ONed7FZ0alczuw';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+    center: [151.004105, -33.813002], // starting position [lng, lat]
+    pitch: 45,
+    bearing: -17.6,
+    zoom: 9 // starting zoom
+});
+map.on('load', function() {
+
+    map.addLayer({
+        "id": "data",
+        "type": "fill-extrusion",
+        "source": {
+            'type': 'geojson',
+            'data': data
+        },
+           'paint': {
+                'fill-extrusion-color' : {
+                    'property': 'M_Pro_Per',
+                    "stops":[
+                        [0, '#CCFFCC'],
+                    	  [0.2,'#99FF99'],
+                        [0.4,'#66FF66'],
+                        [0.6,'#00FF00'],
+                        [0.8,'#00CC00'],
+                        [1,'#006600']
+                    ]
+                    
+                },
+                'fill-extrusion-height' : {
+                    'property': 'M_Pro',
+                    "stops":[
+                        [0, 0],
+                    	  [39, 3900],
+                        [78, 7800],
+                        [117, 11700],
+                        [156, 15600],
+                        [195,19500]
+                    ]
+                },
+                 'fill-extrusion-opacity': 1
+            }
+    });
+});
+
+var maptwo = new mapboxgl.Map({
+    container: 'map2', // container id
+    style: 'mapbox://styles/mapbox/light-v9', // stylesheet location
+    center: [151.004105, -33.813002], // starting position [lng, lat]
+    pitch: 45,
+    bearing: -17.6,
+    zoom: 9 // starting zoom
+});
+maptwo.on('load', function() {
+
+    maptwo.addLayer({
+        "id": "data2",
+        "type": "fill-extrusion",
+        "source": {
+            'type': 'geojson',
+            'data': data2
+        },
+           'paint': {
+                'fill-extrusion-color' : {
+                    'property': 'F_Pro_Per',
+                    "stops":[
+                        [0, '#CCFFCC'],
+                    	[0.2,'#99FF99'],
+                        [0.4,'#66FF66'],
+                        [0.6,'#00FF00'],
+                        [0.8,'#00CC00'],
+                        [1,'#006600']
+                    ]
+                    
+                },
+                'fill-extrusion-height' : {
+                    'property': 'F_Pro',
+                    "stops":[
+                        [0, 0],
+                    	  [7, 700],
+                        [16, 1600],
+                        [45, 4500],
+                        [132, 13200]
+                    ]
+                },
+                 'fill-extrusion-opacity': 1
+            }
+    });
+});
+</script>
+
+</body>
+</html>
